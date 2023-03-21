@@ -101,6 +101,7 @@
                         <goal>push</goal>
                     </goals>
                     <configuration>
+                        <repository>ezlearning</repository>
                         <tag>latest</tag>
                     </configuration>
                 </execution>
@@ -112,7 +113,8 @@
                         <goal>push</goal>
                     </goals>
                     <configuration>
-                        <tag>${project.version}</tag>
+                    <repository>ezlearning</repository>
+                    <tag>${project.version}</tag>
                     </configuration>
                 </execution>
             </executions>

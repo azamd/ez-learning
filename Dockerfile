@@ -1,15 +1,13 @@
-FROM adoptopenjdk/openjdk11:alpine
+FROM adoptopenjdk/openjdk11:x86_64-ubuntu-jdk-11.0.3_7
 
-RUN addgroup -S spring && adduser -S spring -G spring
+RUN mkdir -p /user/share/platform/static/songs
 
-USER spring:spring
+RUN mkdir -p /user/share/platform/bin
 
-VOLUME /tmp
+ADD /target/platform*SNAPSHOT.jar /user/share/cisapify/bin/platform.jar
 
-ARG JAR_FILE
-
-ADD ${JAR_FILE} target/platform-0.0.1-SNAPSHOT.jar
+WORKDIR /user/share/platform
 
 EXPOSE 8080
 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","target/platform-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["/opt/java/openjdk/bin/java", "-jar", "bin/platform.jar"]
