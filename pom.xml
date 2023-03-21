@@ -87,7 +87,93 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+
+    <groupId>org.jolokia</groupId>
+
+    <artifactId>docker-maven-plugin</artifactId>
+
+    <version>0.11.5</version>
+
+    <configuration>
+
+        <images>
+
+            <image>
+
+                <alias>user</alias>
+
+                <name>shivamchandra/javaee7-docker-maven</name>
+
+                <build>
+
+                    <from>shivamchandra/wildfly:8.2</from>
+
+                    <assembly>
+
+                        <descriptor>assembly.xml</descriptor>
+
+                        <basedir>/</basedir>
+
+                    </assembly>
+
+                    <ports>
+
+                        <port>8080</port>
+
+                    </ports>
+
+                </build>
+
+                <run>
+
+                    <ports>
+
+                        <port>8080:8080</port>
+
+                    </ports>
+
+                </run>
+
+            </image>
+
+        </images>
+
+    </configuration>
+
+    <executions>
+
+        <execution>
+
+            <id>docker:build</id>
+
+            <phase>package</phase>
+
+            <goals>
+
+                <goal>build</goal>
+
+            </goals>
+
+        </execution>
+
+        <execution>
+
+            <id>docker:start</id>
+
+            <phase>install</phase>
+
+            <goals>
+
+                <goal>start</goal>
+
+            </goals>
+
+        </execution>
+
+    </executions>
+
+</plugin>
         </plugins>
     </build>
-
 </project>
