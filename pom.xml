@@ -88,92 +88,36 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
-
-    <groupId>org.jolokia</groupId>
-
-    <artifactId>docker-maven-plugin</artifactId>
-
-    <version>0.11.5</version>
-
-    <configuration>
-
-        <images>
-
-            <image>
-
-                <alias>user</alias>
-
-                <name>shivamchandra/javaee7-docker-maven</name>
-
-                <build>
-
-                    <from>shivamchandra/wildfly:8.2</from>
-
-                    <assembly>
-
-                        <descriptor>assembly.xml</descriptor>
-
-                        <basedir>/</basedir>
-
-                    </assembly>
-
-                    <ports>
-
-                        <port>8080</port>
-
-                    </ports>
-
-                </build>
-
-                <run>
-
-                    <ports>
-
-                        <port>8080:8080</port>
-
-                    </ports>
-
-                </run>
-
-            </image>
-
-        </images>
-
-    </configuration>
-
-    <executions>
-
-        <execution>
-
-            <id>docker:build</id>
-
-            <phase>package</phase>
-
-            <goals>
-
-                <goal>build</goal>
-
-            </goals>
-
-        </execution>
-
-        <execution>
-
-            <id>docker:start</id>
-
-            <phase>install</phase>
-
-            <goals>
-
-                <goal>start</goal>
-
-            </goals>
-
-        </execution>
-
-    </executions>
-
-</plugin>
+<!-- Dockerfile-Maven-Plugin Configuration-->
+    <plugin>
+            <groupId>com.spotify</groupId>
+            <artifactId>dockerfile-maven-plugin</artifactId>
+            <version>1.4.10</version>
+            <executions>
+                <execution>
+                    <id>tag-latest</id>
+                    <goals>
+                        <goal>build</goal>
+                        <goal>tag</goal>
+                        <goal>push</goal>
+                    </goals>
+                    <configuration>
+                        <tag>latest</tag>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>tag-version</id>
+                    <goals>
+                        <goal>build</goal>
+                        <goal>tag</goal>
+                        <goal>push</goal>
+                    </goals>
+                    <configuration>
+                        <tag>${project.version}</tag>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
         </plugins>
     </build>
 </project>
