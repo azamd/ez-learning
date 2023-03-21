@@ -106,6 +106,14 @@
                     </configuration>
                 </execution>
             </executions>
+            <configuration>
+                <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+                <repository>registry.hub.docker.com/amdaziz/ez-learning</repository>
+                <tag>${project.version}</tag>
+                <buildArgs>
+                    <JAR_FILE>target/platform.jar</JAR_FILE>
+                </buildArgs>
+            </configuration>
         </plugin>
         </plugins>
     </build>
