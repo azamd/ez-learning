@@ -111,7 +111,7 @@
                 <repository>registry.hub.docker.com/amdaziz/ez-learning</repository>
                 <tag>${project.version}</tag>
                 <buildArgs>
-                    <JAR_FILE>target/platform.jar</JAR_FILE>
+                    <JAR_FILE>target/platform-0.0.1-SNAPSHOT.jar</JAR_FILE>
                 </buildArgs>
             </configuration>
         </plugin>
