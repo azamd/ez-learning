@@ -4,7 +4,7 @@ FROM maven:3.6.3-adoptopenjdk-11 as stage1
 
 ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
-WORKDIR /Ez-learning/ez-learning
+WORKDIR /ez-learning
 
 COPY pom.xml .
 
@@ -18,6 +18,6 @@ RUN mvn clean install -Dmaven.test.skip=true
 
 FROM adoptopenjdk/openjdk11:jre-11.0.9_11-alpine
 
-WORKDIR /Ez-learning/ez-learning
+WORKDIR /ez-learning
 
-COPY --from=stage1 /Ez-learning/ez-learning/target/platform-0.0.1-SNAPSHOT.jar /Ez-learning/ez-learning
+COPY --from=stage1 ez-learning/target/platform-0.0.1-SNAPSHOT.jar /ez-learning
