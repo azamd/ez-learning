@@ -1,15 +1,23 @@
-FROM adoptopenjdk/openjdk11:alpine
+#Stage 1
 
-RUN addgroup -S spring && adduser -S spring -G spring
+FROM maven:3.6.3-adoptopenjdk-11 as stage1
 
-USER spring:spring
+ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
-VOLUME /tmp
+WORKDIR /Ez-learning/ez-learning
 
-ARG JAR_FILE
+COPY pom.xml .
 
-ADD ${JAR_FILE} target/platform-0.0.1-SNAPSHOT.jar
+RUN mvn dependency:go-offline
 
-EXPOSE 8080
+COPY ./src ./src
 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","target/platform-0.0.1-SNAPSHOT.jar"]
+RUN mvn clean install -Dmaven.test.skip=true
+
+#Stage 2
+
+FROM adoptopenjdk/openjdk11:jre-11.0.9_11-alpine
+
+WORKDIR /Ez-learning/ez-learning
+
+COPY --from=stage1 /Ez-learning/ez-learning/target/platform-0.0.1-SNAPSHOT.jar /Ez-learning/ez-learning
