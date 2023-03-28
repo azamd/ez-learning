@@ -6,11 +6,9 @@ ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
 WORKDIR /ez-learning
 
-COPY pom.xml .
+COPY . .
 
 RUN mvn dependency:go-offline
-
-COPY ./src ./src
 
 RUN mvn clean install -Dmaven.test.skip=true
 
