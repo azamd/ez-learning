@@ -4,13 +4,17 @@ FROM maven:3.6.3-adoptopenjdk-11 as stage1
 
 ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
+ENV DB_HOST=somedb \
+     DB_USERNAME=user1 \
+     DB_PASSWORD=pass1
+
 WORKDIR /ez-learning
 
 COPY . .
 
 RUN mvn dependency:go-offline
 
-RUN mvn clean install -Dmaven.test.skip=true
+RUN mvn -Dmaven.test.skip=true clean package
 
 #Stage 2
 
