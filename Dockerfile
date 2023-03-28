@@ -4,7 +4,7 @@ FROM maven:3.6.3-adoptopenjdk-11 as stage1
 
 ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
-ENV DB_HOST=mydb \
+ENV DB_HOST=some-mariadb \
      DB_USERNAME=user1 \
      DB_PASSWORD=pass1
 
