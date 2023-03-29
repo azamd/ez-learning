@@ -22,20 +22,12 @@ services:
       - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
     environment:
       SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "jdbc:mariadb://some-mariadb:$MARIADB_DOCKER_PORT/$MARIADB_DATABASE?useSSL=false",
+        "spring.datasource.url"  : "jdbc:mariadb://mariadb:$MARIADB_DOCKER_PORT/$MARIADB_DATABASE?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC",
         "spring.datasource.username" : "$MARIADB_USER",
         "spring.datasource.password" : "$MARIADB_ROOT_PASSWORD",
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
         "spring.jpa.hibernate.ddl-auto" : "update" 
-
-
-        spring.datasource.url=jdbc:mariadb://${DB_HOST}:33067/somedb?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC
-        spring.datasource.username=${DB_USERNAME}
-        spring.datasource.password=${DB_PASSWORD}
-        spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDB103Dialect
-        spring.jpa.hibernate.ddl-auto=update
-        server.error.include-message=always
-        spring.data.rest.base-path=/api
-        server.port=8082
+        "server.error.include-message=always"
+        "spring.data.rest.base-path=/api"
 
         }'
