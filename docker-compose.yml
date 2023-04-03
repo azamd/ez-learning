@@ -8,7 +8,7 @@ services:
     ports: 
      - '3306:3306'
     volumes: 
-       - '/path/on/host:/var/lib/mysql'
+     - data:/var/lib/mysql
     restart: unless-stopped
     environment:
       MARIADB_PORT_NUMBER: 3306
@@ -16,16 +16,19 @@ services:
       MARIADB_PASSWORD: pass1
       MARIADB_ROOT_PASSWORD: pass1
       MARIADB_DATABASE: somedb
+
   app:
     container_name: ez-learning_spring
     depends_on:
       - mariadb
     links:
       - mariadb:somedb
-    build: .
+    build: 
+      context: .
+      image: amdaziz/ez-learning:latest
     restart: on-failure
     ports:
-        - '8000:8000'
+        - '8083:8083'
     environment:
       MARIADB_HOST: mariadb
       MARIADB_PORT_NUMBER: 3306
