@@ -4,9 +4,9 @@ FROM maven:3.6.3-adoptopenjdk-11 as stage1
 
 #env variables
 
-ENV DB_HOST=some-mariadb \
-     DB_USERNAME=user1 \
-     DB_PASSWORD=pass1
+ENV MARIADB_DATABASE=somedb \
+     MARIADB_USER=user1 \
+     MARIADB_ROOT_PASSWORD=pass1
 
 WORKDIR /ez-learning
 

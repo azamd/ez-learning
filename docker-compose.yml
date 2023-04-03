@@ -1,33 +1,37 @@
 version: "3.8"
 
 services:
+
   mariadb:
-    image: mariadb:latest
+    container_name: mariadb
+    image: bitnami/mariadb:10.3
+    ports: 
+     - '3306:3306'
+    volumes: 
+       - '/path/on/host:/var/lib/mysql'
     restart: unless-stopped
-    env_file: ./.env
     environment:
-      - MARIADB_ROOT_PASSWORD=$MARIADB_ROOT_PASSWORD
-      - MARIADB_DATABASE=$MARIADB_DATABASE
-    ports:
-      - $MARIADB_LOCAL_PORT:$MARIADB_DOCKER_PORT
-    volumes:
-      - db:/var/lib/some-mariadb
+      MARIADB_PORT_NUMBER: 3306
+      MARIADB_USER: user1
+      MARIADB_PASSWORD: pass1
+      MARIADB_ROOT_PASSWORD: pass1
+      MARIADB_DATABASE: somedb
   app:
+    container_name: ez-learning_spring
     depends_on:
       - mariadb
-    build: ./ez-learning
+    links:
+      - mariadb:somedb
+    build: .
     restart: on-failure
-    env_file: ./.env
     ports:
-      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+        - '8000:8000'
     environment:
-      SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "jdbc:mariadb://mariadb:$MARIADB_DOCKER_PORT/$MARIADB_DATABASE?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC",
-        "spring.datasource.username" : "$MARIADB_USER",
-        "spring.datasource.password" : "$MARIADB_ROOT_PASSWORD",
-        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
-        "spring.jpa.hibernate.ddl-auto" : "update" 
-        "server.error.include-message=always"
-        "spring.data.rest.base-path=/api"
-
-        }'
+      MARIADB_HOST: mariadb
+      MARIADB_PORT_NUMBER: 3306
+      MARIADB_USER: user1
+      MARIADB_PASSWORD: pass1
+      MARIADB_DATABASE: somedb
+      APP_PROFILE: prod
+volumes:
+  db_data: {}
