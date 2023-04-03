@@ -8,7 +8,7 @@ COPY . .
 
 RUN mvn dependency:go-offline
 
-RUN --mount=type=cache,target=/root/.m2 mvn -f /app/pom.xml clean package -DskipTests
+RUN mvn -Dmaven.test.skip=true clean package
 
 #Stage 2
 
