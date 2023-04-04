@@ -3,8 +3,8 @@ version: "3.8"
 services:
 
   mariadb:
-    container_name: mariadb
-    image: bitnami/mariadb:10.3
+    container_name: mariadb-container
+    image: mariadb:latest
     networks:
       - ez-network
     ports: 
@@ -25,12 +25,10 @@ services:
       - mariadb
     links:
       - mariadb:somedb
-    build: 
-      context: .
-      image: amdaziz/ez-learning:latest
+    image: amdaziz/ez-learning:latest
     restart: on-failure
     ports:
-        - '8083:8083'
+        - '8080:8080'
     networks:
       - ez-network
     environment:
@@ -41,8 +39,8 @@ services:
       MARIADB_DATABASE: somedb
       APP_PROFILE: prod
 
-  networks:
+networks:
   ez-network:
     name: ez-network
 volumes:
-  db_data: {}
+  data: {}
