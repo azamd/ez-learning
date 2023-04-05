@@ -16,4 +16,6 @@ WORKDIR /ez-learning
 
 EXPOSE 8080
 
-COPY --from=stage1 ez-learning/target/platform-0.0.1-SNAPSHOT.jar /ez-learning
+COPY --from=stage1 /ez-learning/target/platform-0.0.1-SNAPSHOT.jar ez-learning.jar
+
+ENTRYPOINT ["java","-jar","ez-learning.jar"]
