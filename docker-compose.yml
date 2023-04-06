@@ -23,7 +23,7 @@ services:
     container_name: ez-learning_spring
     depends_on:
       - mariadb
-    image: amaziz/ez-learning:latest
+    image: amdaziz/ez-learning:latest
     restart: on-failure
     ports:
         - '8080:8080'
