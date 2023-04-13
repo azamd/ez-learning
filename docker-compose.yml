@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   mariadb:
-    container_name: mariadb-container
+    container_name: mdb-container
     image: mariadb:latest
     networks:
       - ez-network
