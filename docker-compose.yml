@@ -14,9 +14,9 @@ services:
     restart: unless-stopped
     environment:
       MARIADB_PORT_NUMBER: 3306
-      MARIADB_USER: user1
-      MARIADB_PASSWORD: pass1
-      MARIADB_ROOT_PASSWORD: pass1
+      MARIADB_USER: root
+      MARIADB_PASSWORD: 
+      MARIADB_ROOT_PASSWORD: root
       MARIADB_DATABASE: somedb
 
   app:
@@ -32,8 +32,8 @@ services:
     environment:
       MARIADB_HOST: mariadb
       MARIADB_PORT_NUMBER: 3306
-      MARIADB_USER: user1
-      MARIADB_PASSWORD: pass1
+      MARIADB_USER: root
+      MARIADB_PASSWORD: 
       MARIADB_DATABASE: somedb
       APP_PROFILE: prod
 
