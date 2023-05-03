@@ -13,11 +13,11 @@ services:
      - data:/var/lib/mysql
     restart: unless-stopped
     environment:
-      MARIADB_PORT_NUMBER: 3306
-      MARIADB_USER: root
-      MARIADB_PASSWORD: 
-      MARIADB_ROOT_PASSWORD: root
-      MARIADB_DATABASE: somedb
+      MYSQL_PORT_NUMBER: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: pass1
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: somedb
 
   app:
     container_name: ez-learning_spring
@@ -30,11 +30,11 @@ services:
     networks:
       - ez-network
     environment:
-      MARIADB_HOST: mariadb
-      MARIADB_PORT_NUMBER: 3306
-      MARIADB_USER: root
-      MARIADB_PASSWORD: 
-      MARIADB_DATABASE: somedb
+      MYSQL_HOST: mariadb
+      MYSQL_PORT_NUMBER: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: pass1
+      MYSQL_DATABASE: somedb
       APP_PROFILE: prod
 
 networks:
