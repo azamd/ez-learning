@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: git-checkout-task
+spec:
+  params:
+    - name: repo-url
+      type: string
+      default: "https://github.com/azamd/ez-learning.git"  # Default repository URL
+    - name: branch
+      type: string
+      default: "master"  # Default branch name
+  steps:
+    - name: git-checkout
+      image: alpine/git
+      script: |
+        git clone $(params.repo-url) --branch $(params.branch)

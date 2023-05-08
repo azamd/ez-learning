@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: test-task
+spec:
+  params:
+    - name: app-dir
+      type: string
+      default: "/ez-learning"  # Default application directory path
+
+  steps:
+    - name: build
+      image: maven:3.8-openjdk-8
+      workingDir: $(params.app-dir)
+      script: |
+        mvn test
