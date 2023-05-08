@@ -6,10 +6,10 @@ spec:
   params:
     - name: repo-url
       type: string
-      default: "https://github.com/azamd/ez-learning.git"  # Default repository URL
+      default: "https://github.com/azamd/ez-learning.git"
     - name: branch
       type: string
-      default: "master"  # Default branch name
+      default: "master"
   steps:
     - name: git-checkout
       image: alpine/git

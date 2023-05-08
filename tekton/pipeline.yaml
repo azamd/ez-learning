@@ -1,0 +1,36 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: ci-cd-pipeline
+spec:
+  tasks:
+    - name: git-checkout
+      taskRef:
+        name: git-checkout-task
+      params:
+        - name: repo-url
+          value: "https://github.com/azamd/ez-learning.git"
+        - name: branch
+          value: "master"
+
+    - name: build
+      taskRef:
+        name: build-task
+      params:
+        - name: app-dir
+          value: "/ez-learning"
+
+    - name: test
+      taskRef:
+        name: test-task
+      params:
+        - name: app-dir
+          value: "/ez-learning"
+
+pipeline:
+    - name: ci-cd-pipeline
+      tasks:
+        - name: git-checkout
+        - name: build
+        - name: test
+

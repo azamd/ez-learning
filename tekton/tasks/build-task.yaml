@@ -6,7 +6,7 @@ spec:
   params:
     - name: app-dir
       type: string
-      default: "/ez-learning"  # Default application directory path
+      default: "/ez-learning"
 
   steps:
     - name: build
