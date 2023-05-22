@@ -26,6 +26,7 @@ import com.ezlearning.platform.model;
 import com.ezlearning.platform.repositories;
 
 @RunWith(SpringRunner.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ProfesorServiceTest {
 
 @InjectMocks
@@ -36,14 +37,15 @@ static List<Profesor> profs;
 
 
 
-@BeforeEach
-void init() {
+    @BeforeEach
+    void init() {
 		MockitoAnnotations.openMocks(this);
 		profs =  new ArrayList<>();
 		when(profRepository.findAll()).thenReturn(profs);
 	}
 
-@Test
+    @Test
+    @Order(2)
 	void testGetAll(){
 		assertTrue(profServiceImpl.getAll().isEmpty());
 		
@@ -55,6 +57,7 @@ void init() {
 	}
 	
 	@Test
+	@Order(1)
 	void testCreate(){
 		
 		profServiceImpl.create(mock(Profesor.class));
@@ -66,6 +69,7 @@ void init() {
 	}
 	
 	@Test
+	@Order(3)
 	void testUpdate(){
 		
 		profServiceImpl.update(mock(Profesor.class));
@@ -77,6 +81,7 @@ void init() {
 	}
 
     @Test
+	@Order(4)
 	void testDelete(){
 		
 		profServiceImpl.delete(mock(Profesor.class));
