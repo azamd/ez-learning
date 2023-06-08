@@ -1,0 +1,30 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: ez-learning-env-cm
+  namespace: aziz-project
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:data':
+          .: {}
+          'f:APP_PROFILE': {}
+          'f:MYSQL_DATABASE': {}
+          'f:MYSQL_HOST': {}
+          'f:MYSQL_PASSWORD': {}
+          'f:MYSQL_PORT_NUMBER': {}
+          'f:MYSQL_ROOT_PASSWORD': {}
+          'f:MYSQL_USER': {}
+        'f:immutable': {}
+immutable: false
+data:
+  APP_PROFILE: dev
+  MYSQL_DATABASE: sampledb
+  MYSQL_HOST: mysql
+  MYSQL_PASSWORD: nFoFBNswlfyyleBG
+  MYSQL_PORT_NUMBER: '3306'
+  MYSQL_ROOT_PASSWORD: nFoFBNswlfyyleBG
+  MYSQL_USER: root

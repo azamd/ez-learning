@@ -1,0 +1,129 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: ''
+    app.openshift.io/vcs-uri: 'https://github.com/azamd/ez-learning.git'
+    openshift.io/generated-by: OpenShiftWebConsole
+  name: ez-learning-bc
+  generation: 4
+  managedFields:
+    - manager: openshift-apiserver
+      operation: Update
+      apiVersion: build.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:lastVersion': {}
+    - manager: Mozilla
+      operation: Update
+      apiVersion: build.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:app.openshift.io/vcs-ref': {}
+            'f:app.openshift.io/vcs-uri': {}
+            'f:openshift.io/generated-by': {}
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:app.kubernetes.io/component': {}
+            'f:app.kubernetes.io/instance': {}
+            'f:app.kubernetes.io/name': {}
+            'f:app.kubernetes.io/part-of': {}
+        'f:spec':
+          'f:failedBuildsHistoryLimit': {}
+          'f:output':
+            'f:to': {}
+          'f:runPolicy': {}
+          'f:source':
+            'f:contextDir': {}
+            'f:git':
+              .: {}
+              'f:uri': {}
+            'f:type': {}
+          'f:strategy':
+            'f:dockerStrategy':
+              .: {}
+              'f:dockerfilePath': {}
+              'f:env': {}
+            'f:type': {}
+          'f:successfulBuildsHistoryLimit': {}
+          'f:triggers': {}
+  namespace: aziz-project
+  labels:
+    app: ez-learning-git
+    app.kubernetes.io/component: ez-learning-git
+    app.kubernetes.io/instance: ez-learning-git
+    app.kubernetes.io/name: ez-learning-git
+    app.kubernetes.io/part-of: ez-learning-git-app
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'ez-learning-is:latest'
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Docker
+    dockerStrategy:
+      env:
+        - name: MYSQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: ez-learning-env-cm
+              key: MYSQL_DATABASE
+        - name: MYSQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: ez-learning-env-cm
+              key: MYSQL_HOST
+        - name: APP_PROFILE
+          valueFrom:
+            configMapKeyRef:
+              name: ez-learning-env-cm
+              key: APP_PROFILE
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: ez-learning-env-cm
+              key: MYSQL_USER
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: ez-learning-env-cm
+              key: MYSQL_PASSWORD
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: ez-learning-env-cm
+              key: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_PORT_NUMBER
+          valueFrom:
+            configMapKeyRef:
+              name: ez-learning-env-cm
+              key: MYSQL_PORT_NUMBER
+      dockerfilePath: Dockerfile
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/azamd/ez-learning.git'
+    contextDir: /
+  triggers:
+    - type: Generic
+      generic:
+        secretReference:
+          name: ez-learning-git-generic-webhook-secret
+    - type: GitHub
+      github:
+        secretReference:
+          name: ez-learning-git-github-webhook-secret
+    - type: ConfigChange
+  runPolicy: Serial
+status:
+  lastVersion: 8
