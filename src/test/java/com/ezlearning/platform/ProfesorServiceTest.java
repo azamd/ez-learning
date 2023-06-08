@@ -1,4 +1,4 @@
-/*package com.ezlearning.platform;
+package com.ezlearning.platform;
 
 
 import static org.junit.Assert.assertFalse;
@@ -12,23 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.boot.test.context.SpringBootTest;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.core.annotation.Order;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.ezlearning.platform.model;
-import com.ezlearning.platform.services;
-import com.ezlearning.platform.repositories;
+import com.ezlearning.platform.dto.ProfesotDto;
+import com.ezlearning.platform.model.Profesor;
+import com.ezlearning.platform.services.core.impl.*;
+import com.ezlearning.platform.repositories.ProfesorRepository;
 
 @RunWith(SpringRunner.class)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
 public class ProfesorServiceTest {
 
@@ -40,9 +38,9 @@ static List<Profesor> profs;
 
 
 
-    @BeforeEach
+    @Before
     void init() {
-		MockitoAnnotations.openMocks(this);
+		MockitoAnnotations.initMocks(profRepository);
 		profs =  new ArrayList<>();
 		when(profRepository.findAll()).thenReturn(profs);
 	}
@@ -63,7 +61,7 @@ static List<Profesor> profs;
 	@Order(1)
 	void testCreate(){
 		
-		profServiceImpl.create(mock(Profesor.class));
+		profServiceImpl.create(mock(ProfesotDto.class));
 
 		verify(profRepository).save(any());
 		
@@ -102,4 +100,4 @@ static List<Profesor> profs;
 
 
 
-}*/
+}
