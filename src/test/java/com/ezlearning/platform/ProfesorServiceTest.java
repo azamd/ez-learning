@@ -39,7 +39,7 @@ static List<Profesor> profs;
 
 
     @Before
-    void init() {
+    public void init() {
 		MockitoAnnotations.initMocks(profRepository);
 		profs =  new ArrayList<>();
 		when(profRepository.findAll()).thenReturn(profs);
@@ -47,7 +47,7 @@ static List<Profesor> profs;
 
     @Test
     @Order(2)
-	void testGetAll(){
+	public void testGetAll(){
 		assertTrue(profServiceImpl.getAll().isEmpty());
 		
 		profs.add(mock(Profesor.class));
@@ -59,7 +59,7 @@ static List<Profesor> profs;
 	
 	@Test
 	@Order(1)
-	void testCreate(){
+	public void testCreate(){
 		
 		profServiceImpl.create(mock(ProfesotDto.class));
 
@@ -71,7 +71,7 @@ static List<Profesor> profs;
 	
 	@Test
 	@Order(3)
-	void testUpdate(){
+	public void testUpdate(){
 		
 		profServiceImpl.update(mock(Profesor.class));
 
@@ -83,7 +83,7 @@ static List<Profesor> profs;
 
     @Test
 	@Order(4)
-	void testDelete(){
+	public void testDelete(){
 		
 		profServiceImpl.delete(mock(Profesor.class));
 
@@ -92,12 +92,5 @@ static List<Profesor> profs;
 
 		
 	}
-
-
-
-
-
-
-
 
 }
