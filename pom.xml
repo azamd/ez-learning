@@ -114,6 +114,10 @@
                       </goals>
                   </execution>
               </executions>
+              <configuration>
+                <outputDirectory>${project.build.directory}/dependency-check</outputDirectory>
+                <format>HTML</format>
+            </configuration>
             </plugin>
         </plugins>
     </build>
