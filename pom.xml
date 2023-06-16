@@ -110,14 +110,14 @@
               <executions>
                   <execution>
                       <goals>
-                          <goal>verify</goal>
+                          <goal>check</goal>
                       </goals>
                   </execution>
               </executions>
-              <configuration>
+              <!--<configuration>
                 <outputDirectory>${project.build.directory}/dependency-check</outputDirectory>
                 <format>HTML</format>
-            </configuration>
+            </configuration> -->
             </plugin>
         </plugins>
     </build>
