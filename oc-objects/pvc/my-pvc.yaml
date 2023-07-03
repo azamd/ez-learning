@@ -1,0 +1,67 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: my-pvc
+  namespace: aziz-project
+  uid: 8849bf62-0452-4de4-8fd7-07fd1bbcf68d
+  resourceVersion: '1680940'
+  creationTimestamp: '2023-06-30T12:53:06Z'
+  annotations:
+    pv.kubernetes.io/bind-completed: 'yes'
+    pv.kubernetes.io/bound-by-controller: 'yes'
+  finalizers:
+    - kubernetes.io/pvc-protection
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: v1
+      time: '2023-06-30T12:53:06Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:accessModes': {}
+          'f:resources':
+            'f:requests':
+              .: {}
+              'f:storage': {}
+          'f:volumeMode': {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2023-06-30T12:53:06Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:pv.kubernetes.io/bind-completed': {}
+            'f:pv.kubernetes.io/bound-by-controller': {}
+        'f:spec':
+          'f:volumeName': {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2023-06-30T12:53:06Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:accessModes': {}
+          'f:capacity':
+            .: {}
+            'f:storage': {}
+          'f:phase': {}
+      subresource: status
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  volumeName: pv5
+  volumeMode: Filesystem
+status:
+  phase: Bound
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 5Gi

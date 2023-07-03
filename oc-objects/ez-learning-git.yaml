@@ -1,0 +1,95 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: ''
+    app.openshift.io/vcs-uri: 'https://github.com/azamd/ez-learning.git'
+    openshift.io/generated-by: OpenShiftWebConsole
+  resourceVersion: '1648667'
+  name: ez-learning-git
+  uid: 030c7cf8-ca7e-4e8f-89e0-9e947b3c112b
+  creationTimestamp: '2023-06-30T11:58:57Z'
+  generation: 2
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: build.openshift.io/v1
+      time: '2023-06-30T11:58:57Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:app.openshift.io/vcs-ref': {}
+            'f:app.openshift.io/vcs-uri': {}
+            'f:openshift.io/generated-by': {}
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:app.kubernetes.io/component': {}
+            'f:app.kubernetes.io/instance': {}
+            'f:app.kubernetes.io/name': {}
+            'f:app.kubernetes.io/part-of': {}
+        'f:spec':
+          'f:output':
+            'f:to': {}
+          'f:runPolicy': {}
+          'f:source':
+            'f:contextDir': {}
+            'f:git':
+              .: {}
+              'f:uri': {}
+            'f:type': {}
+          'f:strategy':
+            'f:dockerStrategy':
+              .: {}
+              'f:dockerfilePath': {}
+            'f:type': {}
+          'f:triggers': {}
+    - manager: openshift-apiserver
+      operation: Update
+      apiVersion: build.openshift.io/v1
+      time: '2023-06-30T11:58:58Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:lastVersion': {}
+  namespace: aziz-project
+  labels:
+    app: ez-learning-git
+    app.kubernetes.io/component: ez-learning-git
+    app.kubernetes.io/instance: ez-learning-git
+    app.kubernetes.io/name: ez-learning-git
+    app.kubernetes.io/part-of: ez-learning-git-app
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'ez-learning-git:latest'
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/azamd/ez-learning.git'
+    contextDir: /
+  triggers:
+    - type: Generic
+      generic:
+        secretReference:
+          name: ez-learning-git-generic-webhook-secret
+    - type: GitHub
+      github:
+        secretReference:
+          name: ez-learning-git-github-webhook-secret
+    - type: ConfigChange
+  runPolicy: Serial
+status:
+  lastVersion: 1

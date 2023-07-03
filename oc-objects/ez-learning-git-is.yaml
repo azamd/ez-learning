@@ -1,0 +1,54 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: ''
+    app.openshift.io/vcs-uri: 'https://github.com/azamd/ez-learning.git'
+    openshift.io/generated-by: OpenShiftWebConsole
+  resourceVersion: '1653591'
+  name: ez-learning-git
+  uid: 906585ed-9541-4e1b-9ed8-b4849354d864
+  creationTimestamp: '2023-06-30T11:58:56Z'
+  generation: 1
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: image.openshift.io/v1
+      time: '2023-06-30T11:58:56Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:app.openshift.io/vcs-ref': {}
+            'f:app.openshift.io/vcs-uri': {}
+            'f:openshift.io/generated-by': {}
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:app.kubernetes.io/component': {}
+            'f:app.kubernetes.io/instance': {}
+            'f:app.kubernetes.io/name': {}
+            'f:app.kubernetes.io/part-of': {}
+  namespace: aziz-project
+  labels:
+    app: ez-learning-git
+    app.kubernetes.io/component: ez-learning-git
+    app.kubernetes.io/instance: ez-learning-git
+    app.kubernetes.io/name: ez-learning-git
+    app.kubernetes.io/part-of: ez-learning-git-app
+spec:
+  lookupPolicy:
+    local: false
+status:
+  dockerImageRepository: >-
+    image-registry.openshift-image-registry.svc:5000/aziz-project/ez-learning-git
+  tags:
+    - tag: latest
+      items:
+        - created: '2023-06-30T12:06:19Z'
+          dockerImageReference: >-
+            image-registry.openshift-image-registry.svc:5000/aziz-project/ez-learning-git@sha256:7b98e2869000b3d2c94fb9965855db89203b8136d2c9b3eb81ecb3b62bfe7c1a
+          image: >-
+            sha256:7b98e2869000b3d2c94fb9965855db89203b8136d2c9b3eb81ecb3b62bfe7c1a
+          generation: 1

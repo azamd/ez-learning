@@ -1,0 +1,71 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ez-learning-git
+  namespace: aziz-project
+  uid: 7c0d9668-afd1-4957-9d47-8d01c76ad538
+  resourceVersion: '1648764'
+  creationTimestamp: '2023-06-30T11:59:04Z'
+  labels:
+    app: ez-learning-git
+    app.kubernetes.io/component: ez-learning-git
+    app.kubernetes.io/instance: ez-learning-git
+    app.kubernetes.io/name: ez-learning-git
+    app.kubernetes.io/part-of: ez-learning-git-app
+  annotations:
+    app.openshift.io/vcs-ref: ''
+    app.openshift.io/vcs-uri: 'https://github.com/azamd/ez-learning.git'
+    openshift.io/generated-by: OpenShiftWebConsole
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: v1
+      time: '2023-06-30T11:59:04Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:app.openshift.io/vcs-ref': {}
+            'f:app.openshift.io/vcs-uri': {}
+            'f:openshift.io/generated-by': {}
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:app.kubernetes.io/component': {}
+            'f:app.kubernetes.io/instance': {}
+            'f:app.kubernetes.io/name': {}
+            'f:app.kubernetes.io/part-of': {}
+        'f:spec':
+          'f:internalTrafficPolicy': {}
+          'f:ports':
+            .: {}
+            'k:{"port":8080,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+          'f:selector': {}
+          'f:sessionAffinity': {}
+          'f:type': {}
+spec:
+  clusterIP: 172.30.31.28
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  internalTrafficPolicy: Cluster
+  clusterIPs:
+    - 172.30.31.28
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  selector:
+    app: ez-learning-git
+    deployment: ez-learning-git
+status:
+  loadBalancer: {}

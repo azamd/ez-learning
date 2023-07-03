@@ -1,0 +1,75 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: ez-learning-git
+  namespace: aziz-project
+  uid: c7eb18e5-6a04-405c-bbea-f6913202fe04
+  resourceVersion: '1648776'
+  creationTimestamp: '2023-06-30T11:59:04Z'
+  labels:
+    app: ez-learning-git
+    app.kubernetes.io/component: ez-learning-git
+    app.kubernetes.io/instance: ez-learning-git
+    app.kubernetes.io/name: ez-learning-git
+    app.kubernetes.io/part-of: ez-learning-git-app
+  annotations:
+    openshift.io/host.generated: 'true'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2023-06-30T11:59:04Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:app.kubernetes.io/component': {}
+            'f:app.kubernetes.io/instance': {}
+            'f:app.kubernetes.io/name': {}
+            'f:app.kubernetes.io/part-of': {}
+        'f:spec':
+          'f:port':
+            .: {}
+            'f:targetPort': {}
+          'f:tls':
+            .: {}
+            'f:insecureEdgeTerminationPolicy': {}
+            'f:termination': {}
+          'f:to':
+            'f:kind': {}
+            'f:name': {}
+            'f:weight': {}
+          'f:wildcardPolicy': {}
+    - manager: openshift-router
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2023-06-30T11:59:05Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:ingress': {}
+      subresource: status
+spec:
+  host: ez-learning-git-aziz-project.apps.ocp4.smartek.ae
+  to:
+    kind: Service
+    name: ez-learning-git
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: ez-learning-git-aziz-project.apps.ocp4.smartek.ae
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2023-06-30T11:59:05Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-default.apps.ocp4.smartek.ae

@@ -1,0 +1,193 @@
+kind: Build
+apiVersion: build.openshift.io/v1
+metadata:
+  annotations:
+    openshift.io/build-config.name: ez-learning-git
+    openshift.io/build.number: '1'
+    openshift.io/build.pod-name: ez-learning-git-1-build
+  resourceVersion: '1653804'
+  name: ez-learning-git-1
+  uid: 7ee66490-df64-4b51-b3e8-c6fd8835e80e
+  creationTimestamp: '2023-06-30T11:58:58Z'
+  generation: 2
+  managedFields:
+    - manager: openshift-apiserver
+      operation: Update
+      apiVersion: build.openshift.io/v1
+      time: '2023-06-30T11:58:58Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:openshift.io/build-config.name': {}
+            'f:openshift.io/build.number': {}
+          'f:labels':
+            'f:app': {}
+            'f:app.kubernetes.io/name': {}
+            .: {}
+            'f:app.kubernetes.io/part-of': {}
+            'f:app.kubernetes.io/instance': {}
+            'f:openshift.io/build-config.name': {}
+            'f:app.kubernetes.io/component': {}
+            'f:buildconfig': {}
+            'f:openshift.io/build.start-policy': {}
+          'f:ownerReferences':
+            .: {}
+            'k:{"uid":"030c7cf8-ca7e-4e8f-89e0-9e947b3c112b"}': {}
+        'f:spec':
+          'f:output':
+            'f:to': {}
+          'f:serviceAccount': {}
+          'f:source':
+            'f:contextDir': {}
+            'f:git':
+              .: {}
+              'f:uri': {}
+            'f:type': {}
+          'f:strategy':
+            'f:dockerStrategy':
+              .: {}
+              'f:dockerfilePath': {}
+            'f:type': {}
+          'f:triggeredBy': {}
+        'f:status':
+          'f:conditions':
+            .: {}
+            'k:{"type":"New"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:lastUpdateTime': {}
+              'f:status': {}
+              'f:type': {}
+          'f:config': {}
+    - manager: openshift-controller-manager
+      operation: Update
+      apiVersion: build.openshift.io/v1
+      time: '2023-06-30T12:06:34Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            'f:openshift.io/build.pod-name': {}
+        'f:spec':
+          'f:output':
+            'f:pushSecret': {}
+        'f:status':
+          'f:completionTimestamp': {}
+          'f:duration': {}
+          'f:outputDockerImageReference': {}
+          'f:phase': {}
+          'f:startTimestamp': {}
+  namespace: aziz-project
+  ownerReferences:
+    - apiVersion: build.openshift.io/v1
+      kind: BuildConfig
+      name: ez-learning-git
+      uid: 030c7cf8-ca7e-4e8f-89e0-9e947b3c112b
+      controller: true
+  labels:
+    app: ez-learning-git
+    app.kubernetes.io/component: ez-learning-git
+    app.kubernetes.io/instance: ez-learning-git
+    app.kubernetes.io/name: ez-learning-git
+    app.kubernetes.io/part-of: ez-learning-git-app
+    buildconfig: ez-learning-git
+    openshift.io/build-config.name: ez-learning-git
+    openshift.io/build.start-policy: Serial
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'ez-learning-git:latest'
+    pushSecret:
+      name: builder-dockercfg-d5qhc
+  resources: {}
+  triggeredBy:
+    - message: Build configuration change
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile
+  postCommit: {}
+  serviceAccount: builder
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/azamd/ez-learning.git'
+    contextDir: /
+  revision:
+    type: Git
+    git:
+      commit: 5c99ef113a8b9154547b5834902e98698f0624b2
+      author:
+        name: azamd
+        email: tinkertailor1999@gmail.com
+      committer:
+        name: azamd
+        email: tinkertailor1999@gmail.com
+      message: adding PMD
+status:
+  output:
+    to:
+      imageDigest: 'sha256:7b98e2869000b3d2c94fb9965855db89203b8136d2c9b3eb81ecb3b62bfe7c1a'
+  config:
+    kind: BuildConfig
+    namespace: aziz-project
+    name: ez-learning-git
+  outputDockerImageReference: >-
+    image-registry.openshift-image-registry.svc:5000/aziz-project/ez-learning-git:latest
+  duration: 455000000000
+  startTimestamp: '2023-06-30T11:58:59Z'
+  stages:
+    - name: FetchInputs
+      startTime: '2023-06-30T11:59:56Z'
+      durationMilliseconds: 2746
+      steps:
+        - name: FetchGitSource
+          startTime: '2023-06-30T11:59:56Z'
+          durationMilliseconds: 2746
+    - name: PullImages
+      startTime: '2023-06-30T12:00:21Z'
+      durationMilliseconds: 154895
+      steps:
+        - name: PullBaseImage
+          startTime: '2023-06-30T12:00:21Z'
+          durationMilliseconds: 110260
+        - name: PullBaseImage
+          startTime: '2023-06-30T12:02:11Z'
+          durationMilliseconds: 44632
+    - name: Build
+      startTime: '2023-06-30T12:02:56Z'
+      durationMilliseconds: 187400
+      steps:
+        - name: DockerBuild
+          startTime: '2023-06-30T12:02:56Z'
+          durationMilliseconds: 187400
+    - name: PushImage
+      startTime: '2023-06-30T12:06:05Z'
+      durationMilliseconds: 14699
+      steps:
+        - name: PushDockerImage
+          startTime: '2023-06-30T12:06:05Z'
+          durationMilliseconds: 14699
+  conditions:
+    - type: New
+      status: 'False'
+      lastUpdateTime: '2023-06-30T11:58:59Z'
+      lastTransitionTime: '2023-06-30T11:58:59Z'
+    - type: Pending
+      status: 'False'
+      lastUpdateTime: '2023-06-30T11:59:54Z'
+      lastTransitionTime: '2023-06-30T11:59:54Z'
+    - type: Running
+      status: 'False'
+      lastUpdateTime: '2023-06-30T12:06:34Z'
+      lastTransitionTime: '2023-06-30T12:06:34Z'
+    - type: Complete
+      status: 'True'
+      lastUpdateTime: '2023-06-30T12:06:34Z'
+      lastTransitionTime: '2023-06-30T12:06:34Z'
+  completionTimestamp: '2023-06-30T12:06:34Z'
+  phase: Complete
