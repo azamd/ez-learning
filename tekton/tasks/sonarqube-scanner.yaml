@@ -8,10 +8,10 @@ metadata:
     tekton.dev/pipelines.minVersion: 0.17.0
     tekton.dev/platforms: linux/amd64
     tekton.dev/tags: security
-  resourceVersion: '3304338'
+  resourceVersion: '336129904'
   name: sonarqube-scanner
-  uid: 333e4208-de01-422c-a999-60d157f88fab
-  creationTimestamp: '2023-07-02T10:02:32Z'
+  uid: 81f678f5-2447-416c-93ae-cf81c925133d
+  creationTimestamp: '2023-07-04T11:24:26Z'
   generation: 1
   managedFields:
     - apiVersion: tekton.dev/v1beta1
@@ -37,8 +37,8 @@ metadata:
           'f:workspaces': {}
       manager: Mozilla
       operation: Update
-      time: '2023-07-02T10:02:32Z'
-  namespace: aziz-project
+      time: '2023-07-04T11:24:26Z'
+  namespace: medaziz-amdouni-dev
   labels:
     app.kubernetes.io/version: '0.4'
 spec:

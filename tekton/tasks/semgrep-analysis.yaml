@@ -1,0 +1,52 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  creationTimestamp: '2023-07-08T18:19:04Z'
+  generation: 4
+  managedFields:
+    - apiVersion: tekton.dev/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          .: {}
+          'f:params': {}
+          'f:steps': {}
+          'f:workspaces': {}
+      manager: Mozilla
+      operation: Update
+      time: '2023-07-08T18:43:16Z'
+  name: semgrep-analysis
+  namespace: medaziz-amdouni-dev
+  resourceVersion: '355229772'
+  uid: faa1e155-44f7-444b-a95d-3125c1115194
+spec:
+  params:
+    - description: path to the repo to be scanned.
+      name: repo_path
+      type: string
+    - default: .
+      description: The context directory within the repository.
+      name: CONTEXT_DIR
+      type: string
+  steps:
+    - image: 'docker.io/returntocorp/semgrep:latest'
+      name: sca-with-semgrep
+      resources: {}
+      script: |
+        #!/bin/bash
+
+         semgrep --config auto --no-git-ignore --verbose
+
+        EXIT_CODE="$?"
+        if [ "$EXIT_CODE" -eq 0 ]
+        then
+         echo "No findings found"
+         exit $EXIT_CODE
+        else
+         echo "============= Findings found in code. Check Semgrep Cloud Platform for more details. ==============="
+         exit $EXIT_CODE
+        fi
+        workingDir: $(workspaces.source.path)/$(params.CONTEXT_DIR)
+  workspaces:
+    - description: A workspace that contains fetched git repo.
+      name: source
