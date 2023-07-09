@@ -1,0 +1,53 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  creationTimestamp: '2023-07-09T11:43:59Z'
+  generation: 2
+  managedFields:
+    - apiVersion: tekton.dev/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          .: {}
+          'f:params': {}
+          'f:steps': {}
+          'f:workspaces': {}
+      manager: Mozilla
+      operation: Update
+      time: '2023-07-09T11:55:10Z'
+  name: checkov-dockerfile-scanner
+  namespace: medaziz-amdouni-dev
+  resourceVersion: '358417114'
+  uid: ee9b9e48-e78b-4ccb-82cd-1bccb02ffecb
+spec:
+  params:
+    - description: path to the repo to be scanned.
+      name: repo_path
+      type: string
+    - default: .
+      description: The context directory within the repository.
+      name: CONTEXT_DIR
+      type: string
+  steps:
+    - image: 'docker.io/bridgecrew/checkov:latest'
+      name: checkov-dockerfile-config-scanning
+      resources: {}
+      script: |
+        #!/bin/bash
+
+         checkov -d $(params.repo_path)/$(params.CONTEXT_DIR) --framework dockerfile 
+
+
+        EXIT_CODE="$?"
+        if [ "$EXIT_CODE" -eq 0 ]
+        then
+         echo "Dockerfile is well-configured, no vulnerabilities reported."
+         exit $EXIT_CODE
+        else
+         echo "=== Vulnerabilities found, check out Checkov scan report for more details. ==="
+         exit $EXIT_CODE
+        fi
+        workingDir: $(workspaces.source.path)/$(params.CONTEXT_DIR)
+  workspaces:
+    - description: A workspace that contains the project repo.
+      name: source
