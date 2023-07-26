@@ -1,8 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  creationTimestamp: '2023-07-04T11:07:04Z'
-  generation: 15
+  generation: 43
   managedFields:
     - apiVersion: tekton.dev/v1beta1
       fieldsType: FieldsV1
@@ -16,11 +15,8 @@ metadata:
           'f:workspaces': {}
       manager: Mozilla
       operation: Update
-      time: '2023-07-08T18:21:08Z'
   name: ci-cd
   namespace: medaziz-amdouni-dev
-  resourceVersion: '355160257'
-  uid: 83426cd7-ed15-4f2f-9520-bcd408531948
 spec:
   tasks:
     - name: git-clone
@@ -95,83 +91,6 @@ spec:
         - name: CONTEXT_DIR
           value: .
       runAfter:
-        - gitleaks
-      taskRef:
-        kind: ClusterTask
-        name: maven
-      workspaces:
-        - name: source
-          workspace: source
-        - name: maven-settings
-          workspace: maven-settings
-    - name: junit-and-mockito-unit-testing
-      params:
-        - name: MAVEN_IMAGE
-          value: >-
-            registry.redhat.io/ubi8/openjdk-17@sha256:923b18a62d892ec23b6bbf714ecb237a0a0fa3cd225fbf89d39966dd8d421c72
-        - name: GOALS
-          value:
-            - test
-        - name: MAVEN_MIRROR_URL
-          value: ''
-        - name: SERVER_USER
-          value: ''
-        - name: SERVER_PASSWORD
-          value: ''
-        - name: PROXY_USER
-          value: ''
-        - name: PROXY_PASSWORD
-          value: ''
-        - name: PROXY_PORT
-          value: ''
-        - name: PROXY_HOST
-          value: ''
-        - name: PROXY_NON_PROXY_HOSTS
-          value: ''
-        - name: PROXY_PROTOCOL
-          value: http
-        - name: CONTEXT_DIR
-          value: .
-      runAfter:
-        - app-build
-      taskRef:
-        kind: ClusterTask
-        name: maven
-      workspaces:
-        - name: source
-          workspace: source
-        - name: maven-settings
-          workspace: maven-settings
-    - name: checkstyle
-      params:
-        - name: MAVEN_IMAGE
-          value: >-
-            registry.redhat.io/ubi8/openjdk-17@sha256:923b18a62d892ec23b6bbf714ecb237a0a0fa3cd225fbf89d39966dd8d421c72
-        - name: GOALS
-          value:
-            - 'checkstyle:check'
-        - name: MAVEN_MIRROR_URL
-          value: ''
-        - name: SERVER_USER
-          value: ''
-        - name: SERVER_PASSWORD
-          value: ''
-        - name: PROXY_USER
-          value: ''
-        - name: PROXY_PASSWORD
-          value: ''
-        - name: PROXY_PORT
-          value: ''
-        - name: PROXY_HOST
-          value: ''
-        - name: PROXY_NON_PROXY_HOSTS
-          value: ''
-        - name: PROXY_PROTOCOL
-          value: http
-        - name: CONTEXT_DIR
-          value: .
-      runAfter:
-        - junit-and-mockito-unit-testing
         - owasp-dependency-check
       taskRef:
         kind: ClusterTask
@@ -211,44 +130,7 @@ spec:
           value: .
       runAfter:
         - checkstyle
-      taskRef:
-        kind: ClusterTask
-        name: maven
-      workspaces:
-        - name: source
-          workspace: source
-        - name: maven-settings
-          workspace: maven-settings
-    - name: owasp-dependency-check
-      params:
-        - name: MAVEN_IMAGE
-          value: >-
-            registry.redhat.io/ubi8/openjdk-17@sha256:923b18a62d892ec23b6bbf714ecb237a0a0fa3cd225fbf89d39966dd8d421c72
-        - name: GOALS
-          value:
-            - 'dependency-check:check'
-        - name: MAVEN_MIRROR_URL
-          value: ''
-        - name: SERVER_USER
-          value: ''
-        - name: SERVER_PASSWORD
-          value: ''
-        - name: PROXY_USER
-          value: ''
-        - name: PROXY_PASSWORD
-          value: ''
-        - name: PROXY_PORT
-          value: ''
-        - name: PROXY_HOST
-          value: ''
-        - name: PROXY_NON_PROXY_HOSTS
-          value: ''
-        - name: PROXY_PROTOCOL
-          value: http
-        - name: CONTEXT_DIR
-          value: .
-      runAfter:
-        - app-build
+        - unit-testing
       taskRef:
         kind: ClusterTask
         name: maven
@@ -287,6 +169,7 @@ spec:
           value: .
       runAfter:
         - checkstyle
+        - unit-testing
       taskRef:
         kind: ClusterTask
         name: maven
@@ -298,7 +181,7 @@ spec:
     - name: image-build
       params:
         - name: IMAGE
-          value: amdaziz/ez-learning
+          value: 'amdaziz/ez-learning:latest'
         - name: BUILDER_IMAGE
           value: >-
             registry.redhat.io/rhel8/buildah@sha256:00795fafdab9bbaa22cd29d1faa1a01e604e4884a2c935c1bf8e3d1f0ad1c084
@@ -311,7 +194,7 @@ spec:
         - name: TLSVERIFY
           value: 'true'
         - name: FORMAT
-          value: docker
+          value: oci
         - name: BUILD_EXTRA_ARGS
           value: ''
         - name: PUSH_EXTRA_ARGS
@@ -319,7 +202,7 @@ spec:
         - name: SKIP_PUSH
           value: 'false'
       runAfter:
-        - sonarqube-scanner
+        - checkov-scanner
       taskRef:
         kind: ClusterTask
         name: buildah
@@ -345,62 +228,49 @@ spec:
       params:
         - name: ARGS
           value:
-            - 'image amdaziz/ez-learning:latest'
+            - 'image '
         - name: TRIVY_IMAGE
           value: >-
             docker.io/aquasec/trivy@sha256:dea76d4b50c75125cada676a87ac23de2b7ba4374752c6f908253c3b839201d9
         - name: IMAGE_PATH
-          value: >-
-            registry.redhat.io/rhel8/buildah@sha256:00795fafdab9bbaa22cd29d1faa1a01e604e4884a2c935c1bf8e3d1f0ad1c084
+          value: 'amdaziz/ez-learning:latest'
         - name: AIR_GAPPED_ENABLED
           value: 'false'
       runAfter:
-        - image-build
+        - grype-image-scan
       taskRef:
         kind: Task
         name: trivy-scanner
       workspaces:
         - name: manifest-dir
           workspace: source
-    - name: sonarqube-scanner
+    - name: grype-image-scan
       params:
-        - name: SONAR_HOST_URL
-          value: ''
-        - name: SONAR_PROJECT_KEY
-          value: ''
-        - name: PROJECT_VERSION
-          value: '1.0'
-        - name: SOURCE_TO_SCAN
-          value: .
-        - name: SONAR_ORGANIZATION
-          value: ''
-        - name: SONAR_SCANNER_IMAGE
-          value: >-
-            docker.io/sonarsource/sonar-scanner-cli:4.6@sha256:7a976330a8bad1beca6584c1c118e946e7a25fdc5b664d5c0a869a6577d81b4f
-        - name: SONAR_LOGIN_KEY
-          value: login
-        - name: SONAR_PASSWORD_KEY
-          value: password
+        - name: ARGS
+          value:
+            - 'amdaziz/ez-learning:latest'
+        - name: GRYPE_IMAGE
+          value: 'docker.io/anchore/grype:latest'
       runAfter:
-        - sca-with-semgrep
+        - image-build
       taskRef:
         kind: Task
-        name: sonarqube-scanner
+        name: grype
       workspaces:
-        - name: source
+        - name: source-dir
           workspace: source
-    - name: sca-with-semgrep
+    - name: checkov-scanner
       params:
         - name: repo_path
           value: ez-learning
         - name: CONTEXT_DIR
           value: .
       runAfter:
-        - pmd-reporting
-        - cpd-reporting
+        - semgrep-analysis
+        - sonarqube-analysis
       taskRef:
         kind: Task
-        name: semgrep-analysis
+        name: checkov-dockerfile-scanner
       workspaces:
         - name: source
           workspace: source
@@ -416,7 +286,7 @@ spec:
         - name: output_format
           value: json
         - name: report_output_path
-          value: gitleaks/gitleaks-reports.json
+          value: ez-learning/gitleaks/gitleaks-reports.json
         - name: args
           value: []
       runAfter:
@@ -427,6 +297,179 @@ spec:
       workspaces:
         - name: source
           workspace: source
+    - name: sonarqube-analysis
+      params:
+        - name: MAVEN_IMAGE
+          value: >-
+            image-registry.openshift-image-registry.svc:5000/openshift/java:latest
+        - name: GOALS
+          value:
+            - 'sonar:sonar'
+            - '-Dsonar.projectKey=Aziz-project'
+            - '-Dsonar.projectName=''Aziz-project'''
+            - >-
+              -Dsonar.host.url=http://ec2-54-195-35-218.eu-west-1.compute.amazonaws.com:9000
+            - '-Dsonar.token=sqp_a7267a3a3ef66483ac6f5f14f38c732424474cea'
+        - name: MAVEN_MIRROR_URL
+          value: ''
+        - name: SERVER_USER
+          value: ''
+        - name: SERVER_PASSWORD
+          value: ''
+        - name: PROXY_USER
+          value: ''
+        - name: PROXY_PASSWORD
+          value: ''
+        - name: PROXY_PORT
+          value: ''
+        - name: PROXY_HOST
+          value: ''
+        - name: PROXY_NON_PROXY_HOSTS
+          value: ''
+        - name: PROXY_PROTOCOL
+          value: http
+        - name: CONTEXT_DIR
+          value: .
+      runAfter:
+        - pmd-reporting
+        - cpd-reporting
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: maven-settings
+          workspace: maven-settings
+        - name: source
+          workspace: source
+    - name: semgrep-analysis
+      params:
+        - name: repo_path
+          value: ez-learning
+        - name: CONTEXT_DIR
+          value: .
+      runAfter:
+        - pmd-reporting
+        - cpd-reporting
+      taskRef:
+        kind: Task
+        name: semgrep-analysis
+      workspaces:
+        - name: source
+          workspace: source
+    - name: checkstyle
+      params:
+        - name: MAVEN_IMAGE
+          value: >-
+            image-registry.openshift-image-registry.svc:5000/openshift/java:latest
+        - name: GOALS
+          value:
+            - 'checkstyle:check'
+        - name: MAVEN_MIRROR_URL
+          value: ''
+        - name: SERVER_USER
+          value: ''
+        - name: SERVER_PASSWORD
+          value: ''
+        - name: PROXY_USER
+          value: ''
+        - name: PROXY_PASSWORD
+          value: ''
+        - name: PROXY_PORT
+          value: ''
+        - name: PROXY_HOST
+          value: ''
+        - name: PROXY_NON_PROXY_HOSTS
+          value: ''
+        - name: PROXY_PROTOCOL
+          value: http
+        - name: CONTEXT_DIR
+          value: .
+      runAfter:
+        - app-build
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: source
+        - name: maven-settings
+          workspace: maven-settings
+    - name: unit-testing
+      params:
+        - name: MAVEN_IMAGE
+          value: >-
+            image-registry.openshift-image-registry.svc:5000/openshift/java:latest
+        - name: GOALS
+          value:
+            - package
+        - name: MAVEN_MIRROR_URL
+          value: ''
+        - name: SERVER_USER
+          value: ''
+        - name: SERVER_PASSWORD
+          value: ''
+        - name: PROXY_USER
+          value: ''
+        - name: PROXY_PASSWORD
+          value: ''
+        - name: PROXY_PORT
+          value: ''
+        - name: PROXY_HOST
+          value: ''
+        - name: PROXY_NON_PROXY_HOSTS
+          value: ''
+        - name: PROXY_PROTOCOL
+          value: http
+        - name: CONTEXT_DIR
+          value: .
+      runAfter:
+        - app-build
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: source
+        - name: maven-settings
+          workspace: maven-settings
+    - name: owasp-dependency-check
+      params:
+        - name: MAVEN_IMAGE
+          value: >-
+            image-registry.openshift-image-registry.svc:5000/openshift/java:latest
+        - name: GOALS
+          value:
+            - 'dependency-check:check'
+        - name: MAVEN_MIRROR_URL
+          value: ''
+        - name: SERVER_USER
+          value: ''
+        - name: SERVER_PASSWORD
+          value: ''
+        - name: PROXY_USER
+          value: ''
+        - name: PROXY_PASSWORD
+          value: ''
+        - name: PROXY_PORT
+          value: ''
+        - name: PROXY_HOST
+          value: ''
+        - name: PROXY_NON_PROXY_HOSTS
+          value: ''
+        - name: PROXY_PROTOCOL
+          value: http
+        - name: CONTEXT_DIR
+          value: .
+      runAfter:
+        - gitleaks
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: source
+        - name: maven-settings
+          workspace: maven-settings
   workspaces:
     - name: source
     - name: maven-settings

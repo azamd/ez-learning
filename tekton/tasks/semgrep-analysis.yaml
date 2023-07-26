@@ -1,8 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  creationTimestamp: '2023-07-08T18:19:04Z'
-  generation: 4
+  generation: 16
   managedFields:
     - apiVersion: tekton.dev/v1beta1
       fieldsType: FieldsV1
@@ -14,11 +13,8 @@ metadata:
           'f:workspaces': {}
       manager: Mozilla
       operation: Update
-      time: '2023-07-08T18:43:16Z'
   name: semgrep-analysis
   namespace: medaziz-amdouni-dev
-  resourceVersion: '355229772'
-  uid: faa1e155-44f7-444b-a95d-3125c1115194
 spec:
   params:
     - description: path to the repo to be scanned.
@@ -34,18 +30,8 @@ spec:
       resources: {}
       script: |
         #!/bin/bash
-
-         semgrep --config auto --no-git-ignore --verbose
-
-        EXIT_CODE="$?"
-        if [ "$EXIT_CODE" -eq 0 ]
-        then
-         echo "No findings found"
-         exit $EXIT_CODE
-        else
-         echo "============= Findings found in code. Check Semgrep Cloud Platform for more details. ==============="
-         exit $EXIT_CODE
-        fi
+        cd $(workspaces.source.path)/$(params.CONTEXT_DIR)
+        semgrep --config=auto
         workingDir: $(workspaces.source.path)/$(params.CONTEXT_DIR)
   workspaces:
     - description: A workspace that contains fetched git repo.

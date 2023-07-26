@@ -8,10 +8,7 @@ metadata:
     tekton.dev/pipelines.minVersion: 0.12.1
     tekton.dev/platforms: linux/amd64
     tekton.dev/tags: 'CLI, trivy'
-  resourceVersion: '339852497'
   name: trivy-scanner
-  uid: fa9761ff-c7ce-45e2-a440-77a2c7fecd51
-  creationTimestamp: '2023-07-05T08:18:54Z'
   generation: 1
   managedFields:
     - apiVersion: tekton.dev/v1beta1
@@ -37,7 +34,6 @@ metadata:
           'f:workspaces': {}
       manager: Mozilla
       operation: Update
-      time: '2023-07-05T08:18:54Z'
   namespace: medaziz-amdouni-dev
   labels:
     app.kubernetes.io/version: '0.2'

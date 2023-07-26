@@ -41,10 +41,7 @@ metadata:
     tekton.dev/pipelines.minVersion: 0.19.0
     tekton.dev/platforms: linux/amd64
     tekton.dev/tags: 'Security, Secrets'
-  resourceVersion: '350803675'
   name: gitleaks
-  uid: 69207e2b-f37f-4f9e-bfea-0ae985e2089d
-  creationTimestamp: '2023-07-05T18:43:40Z'
   generation: 9
   managedFields:
     - apiVersion: tekton.dev/v1beta1
@@ -55,7 +52,6 @@ metadata:
             'f:kubectl.kubernetes.io/last-applied-configuration': {}
       manager: kubectl-client-side-apply
       operation: Update
-      time: '2023-07-07T17:50:12Z'
     - apiVersion: tekton.dev/v1beta1
       fieldsType: FieldsV1
       fieldsV1:
@@ -78,8 +74,6 @@ metadata:
           'f:steps': {}
           'f:workspaces': {}
       manager: Mozilla
-      operation: Update
-      time: '2023-07-07T18:58:01Z'
   namespace: medaziz-amdouni-dev
   labels:
     app.kubernetes.io/version: '0.1'

@@ -8,10 +8,7 @@ metadata:
     tekton.dev/pipelines.minVersion: 0.17.0
     tekton.dev/platforms: linux/amd64
     tekton.dev/tags: security
-  resourceVersion: '336129904'
   name: sonarqube-scanner
-  uid: 81f678f5-2447-416c-93ae-cf81c925133d
-  creationTimestamp: '2023-07-04T11:24:26Z'
   generation: 1
   managedFields:
     - apiVersion: tekton.dev/v1beta1
