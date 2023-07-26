@@ -196,6 +196,24 @@
                     </execution>
                 </executions>
             </plugin> 
+         <!-- JMeter Graph Maven Plugin for a graphical JMeter results visualization -->
+            <plugin>
+        <groupId>de.codecentric</groupId>
+        <artifactId>jmeter-graph-maven-plugin</artifactId>
+        <version>0.1.0</version>
+        <configuration>
+          <inputFile>${project.build.directory}/jmeter/results/SimpleWebservicePerformanceTest.jtl</inputFile>
+          <graphs>
+            <graph>
+              <pluginType>ThreadsStateOverTime</pluginType>
+              <width>800</width>
+              <height>600</height>
+              <outputFile>${project.build.directory}/jmeter/results/SimpleWebservicePerformanceTest-ThreadsStateOverTime.png</outputFile>
+            </graph>
+            <!-- ... you can declare more <graph>-elements here -->
+          </graphs>
+        </configuration>
+      </plugin>
         </plugins>
     </build>
     
