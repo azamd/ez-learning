@@ -221,7 +221,7 @@
               </graphs>
             </configuration>
           </execution>
-        </execution>
+        </executions>
       </plugin>
         </plugins>
     </build>
