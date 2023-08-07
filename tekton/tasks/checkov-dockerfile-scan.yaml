@@ -29,11 +29,9 @@ spec:
       resources: {}
       script: >
         #!/bin/bash
+        
 
-
-        checkov -d $(params.repo_path)/$(params.CONTEXT_DIR) --framework
-        dockerfile
-
+        checkov -d $(workspaces.source.path)/$(params.CONTEXT_DIR) --framework dockerfile
 
         EXIT_CODE="$?"
 
