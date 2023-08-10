@@ -80,19 +80,27 @@
             <scope>test</scope>
         </dependency> 
 
+        <!-- Selenium Maven Dependency -->
+        <dependency>
+          <groupId>org.seleniumhq.selenium</groupId>
+          <artifactId>selenium-java</artifactId>
+          <version>3.141.59</version>
+       </dependency>
+
+       <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+       <dependency>
+         <groupId>io.github.bonigarcia</groupId>
+         <artifactId>webdrivermanager</artifactId>
+         <version>4.4.0</version>
+       </dependency>
+
+
 
      <!-- JUnit 4 and Mockito dependencies for unit testing -->
     <dependency>
      <groupId>org.mockito</groupId>
      <artifactId>mockito-core</artifactId>
      <version>2.21.0</version>
-    </dependency>
-
-     <dependency>
-        <groupId>org.seleniumhq.selenium.server</groupId>
-        <artifactId>selenium-server-standalone</artifactId>
-        <version>2.30.0</version>
-        <scope>test</scope>
     </dependency>
 
     </dependencies>
@@ -222,46 +230,6 @@
           </execution>
         </executions>
       </plugin>
-
-        <!-- ... Selenium antrun maven plugin -->
-
-      <plugin>
- <groupId>org.apache.maven.plugins</groupId>
- <artifactId>maven-antrun-plugin</artifactId>
- <version>1.7</version>
- <executions>
-    <execution>
-        <phase>pre-integration-test</phase> <!-- your Selenium tests should run in integration phase -->
-        <configuration>
-            <target>
-                <java classname="org.openqa.grid.selenium.GridLauncher"
-                      classpathref="maven.test.classpath"
-                      failonerror="true"
-                      fork="false">
-                    <arg line="-role hub"/>
-                </java>
-                <java classname="org.openqa.grid.selenium.GridLauncher"
-                      classpathref="maven.test.classpath"
-                      failonerror="true"
-                      fork="false">
-                    <arg line="-role node
-                               -browser 'browserName=chrome,version=24.0.1312.56,maxInstances=3'
-                               -browser 'browserName=internet explorer 64bits,version=9.0,maxInstances=2'
-                               -hub http://localhost:4444/grid/register 
-                               -port 5556 
-                               -timeout 40000"/>
-                </java>
-            </target>
-        </configuration>
-        <goals>
-            <goal>run</goal>
-        </goals>
-    </execution>
-</executions>
-</plugin>
-
-        </plugins>
-    </build>
-    
-    
+</plugins>
+</build>    
 </project>
