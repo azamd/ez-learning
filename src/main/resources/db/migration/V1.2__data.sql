@@ -1,12 +1,14 @@
 -- INSERTAR USUARIOS
 INSERT INTO user (username, password, nombre, apellido, email, fecha_registro, imgurl) VALUES
-('edominguez', '$2a$11$dp4wMyuqYE3KSwIyQmWZFeUb7jCsHAdk7ZhFc0qGw6i5J124imQBi', 'Edwin', 'Dominguez',
- 'edwindominguez@hotmail.com', '2019-09-10', 'https://i.imgur.com/T0n0PH9.jpg'),
-('demo', '$2a$11$.NNQgUXukpCuvB5nG.5XGO/NFOESgfPSqETlg5Pj2paBYmStZiucO', 'demo', 'test', 'demo@demo.com', '2019-09-10', 'https://i.imgur.com/k4k1fOM.png');
+('edominguez', '$2a$11$dp4wMyuqYE3KSwIyQmWZFeUb7jCsHAdk7ZhFc0qGw6i5J124imQBi', 'Edwin', 'Dominguez', 'edwindominguez@hotmail.com', '2019-09-10', 'https://i.imgur.com/T0n0PH9.jpg'),
+('demo', '$2a$11$.NNQgUXukpCuvB5nG.5XGO/NFOESgfPSqETlg5Pj2paBYmStZiucO', 'demo', 'test', 'demo@demo.com', '2019-09-10', 'https://i.imgur.com/k4k1fOM.png'),
+('test', '$2a$12$xjsR.MBlTeBGvxtQEZlRBOSW0yknF2vNUkKtemhxakFTaLffAkjCm', 'test', 'test', 'test@gmail.com', '1999-06-04', 'https://i.imgur.com/T0n0PH9.jpg');
 -- INSERTAR ROLES
 INSERT INTO auth_user_group (username, auth_group) VALUES('edominguez', 'USER');
 INSERT INTO auth_user_group (username, auth_group) VALUES('edominguez', 'ADMIN');
 INSERT INTO auth_user_group (username, auth_group) VALUES('demo', 'USER');
+INSERT INTO auth_user_group (username, auth_group) VALUES('test', 'USER');
+
 -- INSERTAR PROFESORES
 INSERT INTO profesor (nombre, apellido, correo, descripcion, detalle, imgurl) VALUES
 ( 'Esteban', 'Fernandez', 'efernandez@gmail.com', 'Profesor de Java', 'Soy Ingeniero en Informática y me gusta mucho compartir mis conocimientos y experiencia como programador. He trabajado en numerosas empresas de Argentina, Estados Unidos y España. Cuento con 2 años de experiencia dando clases en los siguientes temas: Internet, Java, Microsoft Office, C#, Visual Basic y SQL Server, tanto en empresas y como a alumnos particulares.', 'https://i.imgur.com/hhuQ4yc.jpg'),
