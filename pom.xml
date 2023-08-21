@@ -237,7 +237,7 @@
                   <height>800</height>
                   <outputFile>${project.build.directory}/jmeter/results/cursos request.png</outputFile>
                 </graph>
-                <!-- ... you can declare more <graph>-elements here -->
+                <!--you can declare more <graph>-elements here -->
               </graphs>
             </configuration>
           </execution>
