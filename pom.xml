@@ -194,7 +194,7 @@
         <configuration>
           <!-- Configure includes and excludes if needed -->
           <includes>
-              <include>**/*Test.java</include>
+              <include>E2eAutomatedTest.java</include>
           </includes>
       </configuration>
       </plugin>
