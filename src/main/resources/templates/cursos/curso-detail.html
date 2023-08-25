@@ -77,7 +77,7 @@
                     <div class="card-action">
                         <!-- Modal Trigger -->
                         <a th:if="${matriculado == false}" href="#modal-matricula"
-                           class="teal-text darken-1 modal-trigger"><strong>Matricularse</strong></a>
+                           class="teal-text darken-1 modal-trigger" id="matricula"><strong>Matricularse</strong></a>
                         <a target="_blank" th:unless="${matriculado == false}" th:href="${curso.urlCurso}"
                            class="teal-text darken-1"><strong>Acceder</strong></a>
                     </div>
@@ -98,7 +98,7 @@
                 <div class="modal-footer">
                     <a href="#!" class="modal-close waves-effect waves-red btn-flat red-text">Cancelar</a>
                     <a th:href="|/matricula/save/${curso.id_curso}|"
-                       class="modal-close waves-effect waves-green btn-flat teal-text">
+                       class="modal-close waves-effect waves-green btn-flat teal-text" name="confirm">
                         Confirmar</a>
                 </div>
             </div>

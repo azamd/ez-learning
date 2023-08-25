@@ -65,7 +65,7 @@
                         </div>
                         <div class="modal-footer">
                             <a href="#!" class="modal-close waves-effect waves-red btn-flat red-text">Cancelar</a>
-                            <button type="submit" class="modal-close waves-effect waves-green btn-flat teal-text">
+                            <button type="submit" id="confirm" name="confirmar" class="modal-close waves-effect waves-green btn-flat teal-text">
                                 Confirmar</button>
                         </div>
                         </form>
@@ -77,7 +77,7 @@
                         </span>
                         </h5>
                         <div class="mb-3" th:each="curso:${cursos}">
-                            <a th:href="|/cursos/${curso.id_curso}|"><strong th:text="${curso.nomCurso}">Cursos</strong></a>
+                            <a  th:href="|/cursos/${curso.id_curso}|" id="curso"><strong th:text="${curso.nomCurso}">Cursos</strong></a>
                         </div>
                     </div>
                 </div>
