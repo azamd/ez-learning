@@ -202,9 +202,7 @@
         <version>2.22.2</version>
         <configuration>
           <!-- Configure includes and excludes if needed -->
-          <includes>
-              <include>E2eAutomatedTest.java</include>
-          </includes>
+          <excludes><exclude>E2eAutomatedTest</exclude></excludes>
       </configuration>
       </plugin>
          <!-- JMeter Maven Plugin for load testing-->
