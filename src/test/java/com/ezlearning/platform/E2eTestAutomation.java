@@ -32,8 +32,8 @@ public class E2eTestAutomation {
         setUp();
         String[] links = {"/index", "/discover", "/cursos"};
         for (String link : links) {
-            /*driver.get("https://ez-learning-git-amd-med-aziz-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com" + link);*/
-            driver.get("http://localhost:8080" + link);
+            driver.get("https://ez-learning-git-amd-med-aziz-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com" + link);
+            //driver.get("http://localhost:8080" + link);
 
         }
     }
@@ -41,14 +41,19 @@ public class E2eTestAutomation {
     @Test
     public void testLogin(){
 
-     driver.get("http://localhost:8080/login");
+     driver.get("https://ez-learning-git-amd-med-aziz-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/login");
+     //driver.get("http://localhost:8080/login");
+
      WebElement username=driver.findElement(By.id("username"));
      WebElement password=driver.findElement(By.id("password"));
      WebElement login=driver.findElement(By.name("submit"));
      username.sendKeys("test");
      password.sendKeys("test");
      login.click();
-     String actualUrl="http://localhost:8080/";
+
+     //String actualUrl="http://localhost:8080/";
+     String actualUrl="https://ez-learning-git-amd-med-aziz-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/";
+
      String expectedUrl= driver.getCurrentUrl();
      Assert.assertEquals(expectedUrl,actualUrl);
     }
@@ -56,7 +61,10 @@ public class E2eTestAutomation {
 
     @Test
     public void testListProfessors(){
-    driver.get("http://localhost:8080/profesores");
+
+    //driver.get("http://localhost:8080/profesores");
+    driver.get("https://ez-learning-git-amd-med-aziz-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/profesores");
+
     WebElement chevron_right=driver.findElement(By.id("chevron_right"));
     chevron_right.click();
     WebElement curso=driver.findElement(By.id("curso"));
