@@ -14,7 +14,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class E2eTestAutomation {
+public class E2eAutomatedTest {
 
     private static ChromeDriver driver;
 
