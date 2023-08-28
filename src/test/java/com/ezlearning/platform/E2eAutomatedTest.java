@@ -3,16 +3,17 @@ package com.ezlearning.platform;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+//import org.springframework.test.context.junit4.SpringRunner;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 
-@RunWith(SpringRunner.class)
+@RunWith(JUnit4.class)
 @SpringBootTest
 public class E2eAutomatedTest {
 
