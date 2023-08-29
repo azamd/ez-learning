@@ -1,6 +1,6 @@
 #Stage 1
 
-FROM docker.io/maven:3.8-openjdk-8 as stage1
+FROM maven:3.8-openjdk-8 as stage1
 
 WORKDIR /ez-learning
 
@@ -12,7 +12,7 @@ USER  aziz
 
 #Stage 2
 
-FROM docker.io/openjdk:8-jdk-alpine
+FROM openjdk:8-jdk-alpine
 
 WORKDIR /ez-learning
 
