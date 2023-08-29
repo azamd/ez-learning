@@ -2,29 +2,12 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: ez-learning-env-cm
-  namespace: aziz-project
-  managedFields:
-    - manager: Mozilla
-      operation: Update
-      apiVersion: v1
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:data':
-          .: {}
-          'f:APP_PROFILE': {}
-          'f:MYSQL_DATABASE': {}
-          'f:MYSQL_HOST': {}
-          'f:MYSQL_PASSWORD': {}
-          'f:MYSQL_PORT_NUMBER': {}
-          'f:MYSQL_ROOT_PASSWORD': {}
-          'f:MYSQL_USER': {}
-        'f:immutable': {}
-immutable: false
+  namespace: amd-med-aziz-dev
 data:
   APP_PROFILE: dev
   MYSQL_DATABASE: sampledb
-  MYSQL_HOST: mysql
-  MYSQL_PASSWORD: nFoFBNswlfyyleBG
+  MYSQL_HOST: mariadb
+  MYSQL_PASSWORD: 1PxBIR2V4M15d8x37
   MYSQL_PORT_NUMBER: '3306'
-  MYSQL_ROOT_PASSWORD: nFoFBNswlfyyleBG
-  MYSQL_USER: root
+  MYSQL_ROOT_PASSWORD: vdrYMMTAQDglVuOSK
+  MYSQL_USER: AmdMedAziz
