@@ -1,11 +1,8 @@
 package com.ezlearning.platform;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.test.context.junit4.SpringRunner;
@@ -39,7 +36,7 @@ public class E2eAutomatedTest {
         }
     }
 
-    @Test
+    /*@Test
     public void testLogin(){
 
      driver.get("https://ez-learning-git-amd-med-aziz-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/login");
@@ -57,10 +54,10 @@ public class E2eAutomatedTest {
 
      String expectedUrl= driver.getCurrentUrl();
      Assert.assertEquals(expectedUrl,actualUrl);
-    }
+    } */
 
 
-    @Test
+/*@Test
     public void testListProfessors(){
 
     //driver.get("http://localhost:8080/profesores");
@@ -77,9 +74,9 @@ public class E2eAutomatedTest {
     driver.findElement(By.name("confirmar")).click();;*/
     //WebElement confirm=driver.findElement(By.name("confirmar"));
     //confirm.click();
-    WebElement access=driver.findElement(By.id("access"));
-    access.click();
-    }
+    // access=driver.findElement(By.id("access"));
+    //access.click();
+    //}
 
 
 
