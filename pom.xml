@@ -254,34 +254,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin> 
-         <!-- JMeter Graph Maven Plugin for a graphical JMeter results visualization -->
-           
-           <plugin>
-        <groupId>de.codecentric</groupId>
-        <artifactId>jmeter-graph-maven-plugin</artifactId>
-        <version>0.1.0</version>
-        <executions>
-          <execution>
-            <id>create-graphs</id>
-            <goals>
-              <goal>create-graph</goal>
-            </goals>
-            <configuration>
-              <inputFile>${project.build.directory}/jmeter/results/cursos request.jtl</inputFile>
-              <graphs>
-                <graph>
-                  <pluginType>ThreadsStateOverTime</pluginType>
-                  <width>1000</width>
-                  <height>800</height>
-                  <outputFile>${project.build.directory}/jmeter/results/cursos request.png</outputFile>
-                </graph>
-                <!--you can declare additional <graph>-elements here -->
-              </graphs>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+         </plugin> 
 </plugins>
 </build>    
 </project>
