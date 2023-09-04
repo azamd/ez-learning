@@ -87,6 +87,13 @@
           <version>3.141.59</version>
        </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-remote-driver -->
+        <dependency>
+          <groupId>org.seleniumhq.selenium</groupId>
+          <artifactId>selenium-remote-driver</artifactId>
+          <version>4.12.0</version>
+       </dependency>
+
        <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
        <dependency>
          <groupId>io.github.bonigarcia</groupId>
