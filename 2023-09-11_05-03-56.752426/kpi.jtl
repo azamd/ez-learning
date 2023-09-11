@@ -2982,3 +2982,5 @@ timeStamp,elapsed,label,responseCode,responseMessage,threadName,success,bytes,gr
 1694405331111,1303,Profile Request,200,,Ez-Learning-Threads-ThreadStarter 1-6,true,6187,10,10,284,fedora,0
 1694405332086,360,Login Page Request,200,,Ez-Learning-Threads-ThreadStarter 1-2,true,5495,10,10,360,fedora,0
 1694405332241,309,Discover  Request,200,,Ez-Learning-Threads-ThreadStarter 1-10,true,6333,10,10,309,fedora,0
+1694405332362,351,Register Page Request,200,,Ez-Learning-Threads-ThreadStarter 1-9,true,6536,10,10,351,fedora,0
+1694405332307,669,Cursos Request,200,,Ez-Learning-Threads-ThreadStarter 1-5,true,16498,10,10,669,fedora,0
