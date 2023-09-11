@@ -1,0 +1,10 @@
+---
+execution:
+- concurrency: 10
+  hold-for: 5m
+  ramp-up: 1m
+  scenario: my_jmeter_test
+scenarios:
+  my_jmeter_test:
+    script: src/test/jmeter/Ez-Learning-Threads.jmx
+
