@@ -1,0 +1,66 @@
+{
+    "defaultPolicy": {
+        "name": "Custom Policy",
+        "source": "CUSTOM",
+        "attackStrength": "MEDIUM",
+        "alertThreshold": "LOW",
+        "rules": [
+            {
+                "name": "10011",
+                "enabled": false
+            },
+            {
+                "name": "10017",
+                "enabled": false
+            },
+            {
+                "name": "10020",
+                "enabled": false
+            },
+            {
+                "name": "10027",
+                "enabled": false
+            },
+            {
+                "name": "10035",
+                "enabled": false
+            },
+            {
+                "name": "10038",
+                "enabled": false
+            },
+            {
+                "name": "10049",
+                "enabled": false
+            },
+            {
+                "name": "10054",
+                "enabled": false
+            },
+            {
+                "name": "10063",
+                "enabled": false
+            },
+            {
+                "name": "10109",
+                "enabled": false
+            },
+            {
+                "name": "10111",
+                "enabled": false
+            },
+            {
+                "name": "10112",
+                "enabled": false
+            },
+            {
+                "name": "10202",
+                "enabled": false
+            },
+            {
+                "name": "90003",
+                "enabled": false
+            }
+        ]
+    }
+}
