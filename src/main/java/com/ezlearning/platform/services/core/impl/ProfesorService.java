@@ -1,12 +1,13 @@
 package com.ezlearning.platform.services.core.impl;
 
-import com.ezlearning.platform.dto.ProfesotDto;
-import com.ezlearning.platform.model.Profesor;
-import com.ezlearning.platform.repositories.ProfesorRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.ezlearning.platform.dto.ProfesotDto;
+import com.ezlearning.platform.model.Profesor;
+import com.ezlearning.platform.repositories.ProfesorRepository;
 
 @Service
 public class ProfesorService {

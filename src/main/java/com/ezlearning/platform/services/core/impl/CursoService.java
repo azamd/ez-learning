@@ -1,13 +1,14 @@
 package com.ezlearning.platform.services.core.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.ezlearning.platform.dto.CursoDto;
 import com.ezlearning.platform.model.Curso;
 import com.ezlearning.platform.model.Profesor;
 import com.ezlearning.platform.repositories.CursoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class CursoService{
@@ -19,7 +20,7 @@ public class CursoService{
         this.cursoRepository = cursoRepository;
     }
 
-    public void create(CursoDto cursoDto) throws Exception{
+    public void create(CursoDto cursoDto) throws Exception {
         if (null != cursoRepository.findByNomCurso(cursoDto.getNomCurso())) {
             throw new Exception("Ya existe un curso con el nombre " + cursoDto.getNomCurso());
         }
