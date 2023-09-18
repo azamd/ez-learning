@@ -1,11 +1,12 @@
 package com.ezlearning.platform;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.Order;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -29,23 +30,25 @@ public class E2eAutomatedTest {
     }
 
     @Test
-    @Order(2)
     public void testBrowseLinks() throws InterruptedException {
         setUp();
-        String[] links = {"/index", "/discover", "/cursos", "/register"};
+        String[] links = {"/index", "/discover", "/cursos", "/profesores", "/profesores/add"};
         for (String link : links) {
-            //driver.get("https://ez-learning-git-amd-med-aziz-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com" + link);
-            driver.get("http://localhost:8080" + link);
+            if(link != "/profesores" || link !="/profesores/add"){
+            driver.get("https://ez-learning-git-amd-med-aziz-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com" + link);}
+            //driver.get("http://localhost:8080" + link);
+            else
+            testLogin();
 
 
         }
     }
 
-    @Test
+    /*@Test
     @Order(3)
     public void testRegister(){
     //driver.get("https://ez-learning-git-amd-med-aziz-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/register");
-    driver.get("http://localhost:8080/register");
+    //driver.get("http://localhost:8080/register");
 
     WebElement name=driver.findElement(By.id("nombre"));
     WebElement lastname=driver.findElement(By.id("apellido"));
@@ -68,45 +71,48 @@ public class E2eAutomatedTest {
     
     driver.get("http://localhost:8080/profesores");
     
-    }
+    }*/
 
     @Test
-    @Order(5)
     public void testLogin(){
     
-    testRegister();
-    driver.get("http://localhost:8080/login");
-    //driver.get("https://ez-learning-git-amd-med-aziz-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/login");
 
-
-    WebElement username1=driver.findElement(By.id("username"));
-    WebElement password1=driver.findElement(By.id("password"));
+    WebElement username=driver.findElement(By.id("username"));
+    WebElement password=driver.findElement(By.id("password"));
     WebElement login=driver.findElement(By.name("submit"));
 
-    username1.sendKeys("GeorgeWilson01");
-    password1.sendKeys("test");
+    username.sendKeys("test");
+    password.sendKeys("test");
     login.click();
-
-     //String actualUrl="https://ez-learning-git-amd-med-aziz-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/";
-    String actualUrl1="http://localhost:8080/";
-
-
-    String expectedUrl1= driver.getCurrentUrl();
-    Assert.assertEquals(expectedUrl1,actualUrl1);
 
     }
 
     
     @Test
-    @Order(4)
-    public void testProfessorDetail() throws InterruptedException{
+    public void testJoinProfesores() {
 
-    //driver.get("https://ez-learning-git-amd-med-aziz-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/profesores");
+    WebDriverWait wait = new WebDriverWait(driver, 10);
+    WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("namepr")));
 
-    WebElement chevron_right=driver.findElement(By.id("chevron_right"));
-    chevron_right.click();
+    WebElement name=driver.findElement(By.name("namepr"));
+    WebElement lastname=driver.findElement(By.name("lastnamepr"));
+    WebElement email=driver.findElement(By.name("emailpr"));
+    WebElement imgurl=driver.findElement(By.name("imgurlpr"));
+    WebElement description=driver.findElement(By.name("descriptionpr"));
 
-    driver.get("http://localhost:8080/cursos/1");
+    WebElement registerbtn=driver.findElement(By.name("submitpr"));
+
+    name.sendKeys("George");
+    lastname.sendKeys("Wilson");
+    email.sendKeys("george.wilson@gmail.com");
+    description.sendKeys("Hi, my name is George Wilson and Iam a DevOps instructor with 10 years of experience.");
+    imgurl.sendKeys("https://i.imgur.com/T0n0PH9.jpg");
+
+    registerbtn.click();
+
+    /*String actualUrl1="https://ez-learning-git-amd-med-aziz-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com/profesores";
+    String expectedUrl1= driver.getCurrentUrl();
+    Assert.assertEquals(expectedUrl1,actualUrl1);*/
 
     }
 

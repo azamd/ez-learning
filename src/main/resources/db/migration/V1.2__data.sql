@@ -8,6 +8,8 @@ INSERT INTO auth_user_group (username, auth_group) VALUES('edominguez', 'USER');
 INSERT INTO auth_user_group (username, auth_group) VALUES('edominguez', 'ADMIN');
 INSERT INTO auth_user_group (username, auth_group) VALUES('demo', 'USER');
 INSERT INTO auth_user_group (username, auth_group) VALUES('test', 'USER');
+INSERT INTO auth_user_group (username, auth_group) VALUES('test', 'ADMIN');
+
 
 
 -- INSERTAR PROFESORES
