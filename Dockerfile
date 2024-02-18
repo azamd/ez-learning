@@ -18,7 +18,7 @@ WORKDIR /ez-learning
 
 EXPOSE 8080
 
-HEALTHCHECK CMD curl --fail http://localhost:3000 || exit 1
+HEALTHCHECK CMD curl --fail http://localhost:8080 || exit 1
 
 COPY --from=stage1 /ez-learning/target/*.jar ez-learning.jar
 
